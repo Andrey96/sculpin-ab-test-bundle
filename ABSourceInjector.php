@@ -2,6 +2,7 @@
 
 namespace Yaenergetik\Sculpin\Bundle\ABTestBundle;
 
+use Dflydev\Canal\Analyzer\Analyzer;
 use Sculpin\Core\Sculpin;
 use Sculpin\Core\Source\FilesystemDataSource;
 use Sculpin\Core\Event\SourceSetEvent;
@@ -18,7 +19,7 @@ class ABSourceInjector implements EventSubscriberInterface
 
     public function beforeRun(SourceSetEvent $event)
     {
-        $abDataSource = new FileSystemDataSource('source_ab', [], [], []);
+        $abDataSource = new FileSystemDataSource('source_ab', [], [], [], null, null, new Analyzer());
         $abDataSource->refresh($event->sourceSet());
     }
 }

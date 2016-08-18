@@ -1,0 +1,14 @@
+{
+    "name": "yaenergetik/sculpin-ab-test-bundle",
+    "description": "Sculpin A/B Test Bundle",
+    "authors": [
+        {
+            "name": "Andrey96",
+            "email": "i@andrey96.ru"
+        }
+    ],
+    "autoload": {
+        "psr-0": { "Yaenergetik\\Sculpin\\Bundle\\ABTestBundle": "" }
+    },
+    "target-dir": "Yaenergetik/Sculpin/Bundle/ABTestBundle"
+}

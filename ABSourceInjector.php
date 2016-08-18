@@ -2,9 +2,9 @@
 
 namespace Yaenergetik\Sculpin\Bundle\ABTestBundle;
 
-use Dflydev\Canal\Analyzer\Analyzer;
 use Sculpin\Core\Sculpin;
-use Sculpin\Core\Source\FilesystemDataSource;
+use Sculpin\Core\Source\FileSource;
+use Sculpin\Core\Source\SourceSet;
 use Sculpin\Core\Event\SourceSetEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
@@ -19,7 +19,18 @@ class ABSourceInjector implements EventSubscriberInterface
 
     public function beforeRun(SourceSetEvent $event)
     {
-        $abDataSource = new FileSystemDataSource('source_ab', [], [], [], null, null, new Analyzer());
-        $abDataSource->refresh($event->sourceSet());
+        $sources = [];
+        foreach ($event->sourceSet()->updatedSources() as $source) {
+            if ($source instanceof FileSource) {
+                $path = 'source_ab/'.$source->relativePathname();
+                if (file_exists($path)) {
+                    $sources[] = new ABFileSource($source, $path);
+                }
+            }
+        }
+        foreach ($sources as $source) {
+            $source->setHasChanged();
+            $event->sourceSet()->mergeSource($source);
+        }
     }
 }

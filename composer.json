@@ -10,5 +10,6 @@
     "autoload": {
         "psr-0": { "Yaenergetik\\Sculpin\\Bundle\\ABTestBundle": "" }
     },
-    "target-dir": "Yaenergetik/Sculpin/Bundle/ABTestBundle"
+    "target-dir": "Yaenergetik/Sculpin/Bundle/ABTestBundle",
+    "minimum-stability": "dev"
 }
